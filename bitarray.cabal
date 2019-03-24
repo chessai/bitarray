@@ -1,61 +1,71 @@
-cabal-version:       2.0
-name:                bitarray
-version:             0.0.0
-synopsis:            bitarray supporting efficient writes/reads
-description:         bitarray supporting efficient writes/reads
-homepage:            https://github.com/chessai/bitarray
-bug-reports:         https://github.com/chessai/bitarray/issues
-license:             BSD3
-license-file:        LICENSE
-author:              chessai
-maintainer:          chessai1996@gmail.com
-copyright:           2019 chessai
-category:            Data
-build-type:          Simple
-extra-doc-files:     README.md
-                   , CHANGELOG.md
-tested-with:         GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.3
-
-source-repository head
-  type:                git
-  location:            https://github.com/chessai/bitarray.git
+cabal-version: 2.2
+name:
+  bitarray
+version:
+  0.1
+synopsis:
+  bit arrays supporting efficient writes/reads
+description:
+  bitarray supporting efficient writes/reads
+homepage:
+  https://github.com/chessai/bitarray
+bug-reports:
+  https://github.com/chessai/bitarray/issues
+license:
+  BSD-3-Clause
+license-file:
+  LICENSE
+author:
+  chessai
+maintainer:
+  chessai <chessai1996@gmail.com>
+copyright:
+  2019 chessai
+category:
+  Data
+build-type:
+  Simple
+extra-doc-files:
+    README.md
+  , CHANGELOG.md
+tested-with:
+    GHC == 8.2.2
+  , GHC == 8.4.4
+  , GHC == 8.6.3
 
 library
-  hs-source-dirs:      src
-  exposed-modules:     Bitarray
-                       
+  hs-source-dirs:
+    src
+  exposed-modules:
+    BitArray
+    BitArray.Internal
+    BitArray.Mutable
+  build-depends:
+    , base >= 4.10.1.0 && < 4.13
+    , primitive >= 0.6.4 
+  ghc-options:
+    -Wall
+    -O2
+  default-language:
+    Haskell2010
 
-  build-depends:       base >= 4.10.1.0 && < 4.13
-                     
+executable bitarray-asm
+  hs-source-dirs:
+    app
+  main-is:
+    Main.hs
+  build-depends:
+    , base
+    , bitarray
+  ghc-options:
+    -Wall
+    -O2
+    -ddump-asm
+  default-language:
+    Haskell2010
 
-  ghc-options:         -Wall
-                       -Wincomplete-uni-patterns
-                       -Wincomplete-record-updates
-                       -Wcompat
-                       -Widentities
-                       -Wredundant-constraints
-                       -fhide-source-paths
-
-  default-language:    Haskell2010
-
-test-suite bitarray-test
-  type:                exitcode-stdio-1.0
-  hs-source-dirs:      test
-  main-is:             Spec.hs
-
-  build-depends:       base >= 4.10.1.0 && < 4.13
-                     , bitarray
-                     
-
-  ghc-options:         -Wall
-                       -threaded
-                       -rtsopts
-                       -with-rtsopts=-N
-                       -Wincomplete-uni-patterns
-                       -Wincomplete-record-updates
-                       -Wcompat
-                       -Widentities
-                       -Wredundant-constraints
-                       -fhide-source-paths
-
-  default-language:    Haskell2010
+source-repository head
+  type:
+    git
+  location:
+    https://github.com/chessai/bitarray.git
